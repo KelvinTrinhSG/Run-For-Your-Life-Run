@@ -17,7 +17,7 @@ public class Canvas_Manger : MonoBehaviour
     public GameObject Mobile_Movment_Button;
     public GameObject Pc_Movment_Button;
     public GameObject Play_Menu;
-    private const string DROP_ERC20_CONTRACT = "0xe827fACEe1De7320c8aeD25C01B90a0f4cFFCa2B";
+    private const string DROP_ERC20_CONTRACT = "0xDA79B1048F39859AF8BA625AF50Fb7bc514d1511";
 
     private GameObject Game_Manger;
     private bool Add = false;
