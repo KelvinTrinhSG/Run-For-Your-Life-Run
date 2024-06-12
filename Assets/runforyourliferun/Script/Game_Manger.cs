@@ -4,14 +4,13 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public class Game_Manger : MonoBehaviour
-{
-
-    
+{    
     [HideInInspector]public int Max_Hart;
-    [HideInInspector] public int harts;
+    //[HideInInspector] public int harts;
+    public int harts;
     [HideInInspector] public int Dead_Zombie;
     [HideInInspector] public string Distens;
-    [HideInInspector] public float _player_Speed;
+    public float _player_Speed;
     [HideInInspector] public bool Stop_Meters;
 
     public bool Its_Mobile_Game;    
@@ -54,8 +53,7 @@ public class Game_Manger : MonoBehaviour
 
 
     void Start()
-    {
-        
+    {        
         Player = GameObject.FindGameObjectWithTag("Player");
         Text_H_Playes = Texts_Holder.GetComponent<RectTransform>().anchoredPosition;
         _player_Speed = Player_Speed;
@@ -64,9 +62,7 @@ public class Game_Manger : MonoBehaviour
 
     
     void Update()
-    {
-
-        
+    {        
         Dist_Calculator();
         Dead_Zombie_Text.text = Dead_Zombie.ToString();
         if (harts >= Max_Hart *2 && harts > 2)
@@ -126,10 +122,6 @@ public class Game_Manger : MonoBehaviour
                    , 0);
 
                 }
-               
-                   
-                
-                
             }
             if (Meters1K > 9)
             {
@@ -142,9 +134,7 @@ public class Game_Manger : MonoBehaviour
                     Meters100K_Text.GetComponent<Text>().color = new Color(1, 1, 1, 0.2f);
                     Texts_Holder.GetComponent<RectTransform>().anchoredPosition = new Vector3(581.4f, Texts_Holder.GetComponent<RectTransform>().anchoredPosition.y
                     , 0);
-
-                }
-                
+                }                
             }
             if (Meters10K > 9)
             {
@@ -254,6 +244,16 @@ public class Game_Manger : MonoBehaviour
             Hart06.GetComponent<Image>().sprite = Hart_Zero;
             Hart07.GetComponent<Image>().sprite = Hart_Zero;
             //Debug.Log("Player Dead");
+            var Enemies = GameObject.FindGameObjectsWithTag("Zombie");
+            foreach (var Enm in Enemies)
+            {
+                Destroy(Enm.gameObject);
+            }
+            var Object = GameObject.FindGameObjectsWithTag("Obst");
+            foreach (var Obs in Object)
+            {
+                Destroy(Obs.gameObject);
+            }
 
         }
         if (harts >= 1)

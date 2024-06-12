@@ -24,8 +24,7 @@ public class Canvas_Manger : MonoBehaviour
     private int ShowAds;
     void Start()
     {
-        Game_Manger = GameObject.FindGameObjectWithTag("Game Manger");
-        
+        Game_Manger = GameObject.FindGameObjectWithTag("Game Manger");        
     }
 
     // Update is called once per frame
@@ -49,7 +48,7 @@ public class Canvas_Manger : MonoBehaviour
         Dist_Text.text = Game_Manger.GetComponent<Game_Manger>().Distens;
         if (Game_Manger.GetComponent<Game_Manger>().harts <= 0 )
         {
-            GameObject.FindObjectOfType<AdmobAdss>().DestroyAd();
+            //GameObject.FindObjectOfType<AdmobAdss>().DestroyAd();
             GameObject.FindObjectOfType<AudioMManger>().stop("Breath");           
             //Text_Holder.SetActive(false);
             Harts.SetActive(false);
@@ -62,8 +61,6 @@ public class Canvas_Manger : MonoBehaviour
             {
                 Game_Manger.GetComponent<Game_Manger>().Player_Speed -= Time.deltaTime;
             }
-           
-            
         }
         if (Game_Manger.GetComponent<Game_Manger>().Its_Mobile_Game)
         {
@@ -79,7 +76,6 @@ public class Canvas_Manger : MonoBehaviour
     }
     public void Reaplay ()
     {
-        
         var Enemies = GameObject.FindGameObjectsWithTag("Zombie");
         foreach (var Enm in Enemies)
         {
@@ -117,19 +113,19 @@ public class Canvas_Manger : MonoBehaviour
         Movment_Button.SetActive(true);
         Dead_Menu.SetActive(false);
         Add = true;
-        
-        
+        Game_Manger.GetComponent<Game_Manger>().Player_Speed = 8;
+
     }    
     public void Play ()
     {
         Game_Manger.GetComponent<Game_Manger>().Stop_Meters = false;
         Play_Menu.SetActive(false);
-        GameObject.FindObjectOfType<AudioMManger>().Playe("Breath");        
-        GameObject.FindObjectOfType<AdmobAdss>().LoadAd(); 
+        GameObject.FindObjectOfType<AudioMManger>().Playe("Breath");
+        Game_Manger.GetComponent<Game_Manger>().Player_Speed = 8;
+        //GameObject.FindObjectOfType<AdmobAdss>().LoadAd(); 
     }
     public async void Revive ()
     {
-        
         // GameObject.FindObjectOfType<AdmobAdss>().ShowRewardedAd();
         try
         {
@@ -146,12 +142,10 @@ public class Canvas_Manger : MonoBehaviour
     }
     public void Resume ()
     {
-
-        
+        Game_Manger.GetComponent<Game_Manger>().Player_Speed = 8;
         Game_Manger.GetComponent<Game_Manger>().harts = 3;
         Game_Manger.GetComponent<Game_Manger>().Stop_Meters = false;
         GameObject.FindObjectOfType<AudioMManger>().Playe("Breath");
-
         Text_Holder.SetActive(true);
         Harts.SetActive(true);
         Guns.SetActive(true);
@@ -159,15 +153,13 @@ public class Canvas_Manger : MonoBehaviour
         Movment_Button.SetActive(true);
         Dead_Menu.SetActive(false);
         Add = true;
-        
-        
     }
     public void REviv_Replay()
     {
         ShowAds = Random.Range(0, 2);
         if (ShowAds == 0)
         {
-            GameObject.FindObjectOfType<AdmobAdss>().ShowAd();
+            //GameObject.FindObjectOfType<AdmobAdss>().ShowAd();
         }
         else
         {

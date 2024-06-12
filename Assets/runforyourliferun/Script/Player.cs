@@ -51,15 +51,12 @@ public class Player : MonoBehaviour
     private bool EnemyTime;
     void Start()
     {
-
         Spawen_Enemy_Enemy_Conte = Spawen_Enemy_Time;
         Game_Manger = GameObject.FindGameObjectWithTag ("Game Manger");        
-        Camera = GameObject.Find("Main Camera");
-        
+        Camera = GameObject.Find("Main Camera");        
     }
     private void LateUpdate()
-    {
-        
+    {        
        if (Camera.transform.position.x < transform.position.x)
         {
             CamX += Time.deltaTime *1.75f;
@@ -108,29 +105,24 @@ public class Player : MonoBehaviour
         Monment();
         if (First_Delay <= 0)
         {
-            Spawen_Object();
-            Spawen_Object_Decoration();
-            Spawen_Enemy();
-            Spawen_Health();
-            Spawen_Wepens();
+            if ((Game_Manger.GetComponent<Game_Manger>().harts > 0) && (Game_Manger.GetComponent<Game_Manger>().Player_Speed > 0)) { 
+                Spawen_Object();
+                Spawen_Object_Decoration();
+                Spawen_Enemy();
+                Spawen_Health();
+                Spawen_Wepens();
+            }
         }
-
         if (Had_Wepens)
         {
-            Charcter.GetComponent<Animator>().SetBool("Had-Gun", true);
-            
+            Charcter.GetComponent<Animator>().SetBool("Had-Gun", true);            
             Wepens.SetActive(true);
-            
-
         }
         else
         {
             Charcter.GetComponent<Animator>().SetBool("Had-Gun", false);            
-            Wepens.SetActive(false);
-            
+            Wepens.SetActive(false);            
         }
-       
-
     }
 
     public void Spawen_Object ()
@@ -332,10 +324,6 @@ public class Player : MonoBehaviour
                 }
             }
         }
-        
-       
-
-        
     }
 
     private void OnCollisionEnter(Collision Col)
@@ -356,9 +344,7 @@ public class Player : MonoBehaviour
             gameObject.GetComponent<CharacterController>().enabled = false;
             gameObject.GetComponent<CapsuleCollider>().enabled = false;
             It_Heart = true;
-        }
-
-        
+        }        
         if (Col.gameObject.tag == "Health")
         {
             Game_Manger.GetComponent<Game_Manger>().harts++;
@@ -366,8 +352,7 @@ public class Player : MonoBehaviour
             GameObject.FindObjectOfType<AudioMManger>().Playe("Hart  Pick Up");
         }
         if (Col.gameObject.tag == "Wepen")
-        {
-            
+        {            
             if (Col.gameObject.GetComponent<Wepen>().Current_Wepen_Number == 0)
             {
                 if (Pistol_bullet + 20 <= Pistol_bullet_Max)
@@ -419,10 +404,8 @@ public class Player : MonoBehaviour
             Destroy(Col.gameObject);
         }
     }
-
     public void Fire ()
-    {
-       
+    {       
         if (Gun_Counter == 1 )
         {
             if (Pistol_bullet > 0)

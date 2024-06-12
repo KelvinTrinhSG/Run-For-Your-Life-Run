@@ -67,8 +67,7 @@ public class Zombie : MonoBehaviour
        
     }
     public void MovToPlayer ()
-    {
-        
+    {        
         Vector3 Direction = Player.transform.position - transform.position;
         transform.Translate(Direction.normalized * 1.3f * Time.deltaTime, Space.World);
     }
@@ -80,7 +79,6 @@ public class Zombie : MonoBehaviour
         {
             if (other.gameObject.tag == "Player")
             {
-
                 Anim.SetBool("Attack", true);
                 Game_Manger.GetComponent<Game_Manger>().Heart_P();
                 Game_Manger.GetComponent<Game_Manger>().harts--;
@@ -91,7 +89,6 @@ public class Zombie : MonoBehaviour
             }
             if (other.gameObject.tag == "Bullet")
             {
-
                 Instantiate(other.gameObject.GetComponent<Bullet>().BloodPArticl,
                     other.transform.position, other.transform.rotation);                
                 Health = Health - other.GetComponent<Bullet>().Power;
