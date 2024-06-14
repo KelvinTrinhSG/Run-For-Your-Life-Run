@@ -30,6 +30,15 @@ public class BlockchainManager : MonoBehaviour
 
     private bool isPanelVisible = false;
 
+    public GameObject player;
+    public GameObject gameManager;
+    public GameObject canvasManager;
+
+    public Button reviveButton;
+    public Text reviveButtonText;
+    public Button rePlayButton;
+
+
     private void Start()
     {
         tokenGatePanel.SetActive(false);
@@ -108,6 +117,20 @@ public class BlockchainManager : MonoBehaviour
         var contract = ThirdwebManager.Instance.SDK.GetContract("0x421D1Da942e804b1C1aaDF2e5304343bD7554C0F");
         var result = await contract.ERC20.Claim("1");
         //HP Added here
+        // Get the Player script component attached to the Player GameObject
+        Game_Manger gameManagerScript = gameManager.GetComponent<Game_Manger>();
+        // Check if the Player script is found
+        if (gameManagerScript != null)
+        {
+            // Change the value of Pistol_bullet to 20
+            gameManagerScript.harts += 2;
+            Debug.Log("harts + 2");
+        }
+        else
+        {
+            Debug.LogError("harts error");
+        }
+
         Debug.Log("Token claimed");
         playButton.interactable = true;
         shopButton.interactable = true;
@@ -116,7 +139,8 @@ public class BlockchainManager : MonoBehaviour
         machinegunBtn.interactable = true;
         shotgunBtn.interactable = true;
         uziBtn.interactable = true;
-        claimStatusText.text = "Health Claimed!";
+        claimStatusText.text = "+2 Hearts";
+        //+2
     }
 
     public async void ClaimPistol()
@@ -133,7 +157,21 @@ public class BlockchainManager : MonoBehaviour
         shopButton.interactable = false;
         var contract = ThirdwebManager.Instance.SDK.GetContract("0x421D1Da942e804b1C1aaDF2e5304343bD7554C0F");
         var result = await contract.ERC20.Claim("1");
-        //HP Added here
+
+        // Get the Player script component attached to the Player GameObject
+        Player playerScript = player.GetComponent<Player>();
+        // Check if the Player script is found
+        if (playerScript != null)
+        {
+            // Change the value of Pistol_bullet to 20
+            playerScript.Pistol_bullet = 20;
+            Debug.Log("Pistol_bullet value changed to 20");
+        }
+        else
+        {
+            Debug.LogError("Player script not found on the Player GameObject");
+        }
+
         Debug.Log("Token claimed");
         playButton.interactable = true;
         shopButton.interactable = true;
@@ -143,6 +181,7 @@ public class BlockchainManager : MonoBehaviour
         shotgunBtn.interactable = true;
         uziBtn.interactable = true;
         claimStatusText.text = "Pistol Equipped!";
+        //+20
     }
 
     public async void ClaimMachinegun()
@@ -159,7 +198,21 @@ public class BlockchainManager : MonoBehaviour
         shopButton.interactable = false;
         var contract = ThirdwebManager.Instance.SDK.GetContract("0x421D1Da942e804b1C1aaDF2e5304343bD7554C0F");
         var result = await contract.ERC20.Claim("1");
-        //HP Added here
+
+        // Get the Player script component attached to the Player GameObject
+        Player playerScript = player.GetComponent<Player>();
+        // Check if the Player script is found
+        if (playerScript != null)
+        {
+            // Change the value of Pistol_bullet to 20
+            playerScript.Machinegun_bullet = 20;
+            Debug.Log("Pistol_bullet value changed to 20");
+        }
+        else
+        {
+            Debug.LogError("Player script not found on the Player GameObject");
+        }
+
         Debug.Log("Token claimed");
         playButton.interactable = true;
         shopButton.interactable = true;
@@ -169,6 +222,7 @@ public class BlockchainManager : MonoBehaviour
         shotgunBtn.interactable = true;
         uziBtn.interactable = true;
         claimStatusText.text = "Machinegun Equipped!";
+        //+20
     }
 
     public async void ClaimShotgun()
@@ -185,7 +239,21 @@ public class BlockchainManager : MonoBehaviour
         shopButton.interactable = false;
         var contract = ThirdwebManager.Instance.SDK.GetContract("0x421D1Da942e804b1C1aaDF2e5304343bD7554C0F");
         var result = await contract.ERC20.Claim("1");
-        //HP Added here
+
+        // Get the Player script component attached to the Player GameObject
+        Player playerScript = player.GetComponent<Player>();
+        // Check if the Player script is found
+        if (playerScript != null)
+        {
+            // Change the value of Pistol_bullet to 20
+            playerScript.Shotgun_bullet = 20;
+            Debug.Log("Pistol_bullet value changed to 20");
+        }
+        else
+        {
+            Debug.LogError("Player script not found on the Player GameObject");
+        }
+
         Debug.Log("Token claimed");
         playButton.interactable = true;
         shopButton.interactable = true;
@@ -195,6 +263,7 @@ public class BlockchainManager : MonoBehaviour
         shotgunBtn.interactable = true;
         uziBtn.interactable = true;
         claimStatusText.text = "Shotgun Equipped!";
+        //+20
     }
 
     public async void ClaimUzi()
@@ -211,7 +280,21 @@ public class BlockchainManager : MonoBehaviour
         shopButton.interactable = false;
         var contract = ThirdwebManager.Instance.SDK.GetContract("0x421D1Da942e804b1C1aaDF2e5304343bD7554C0F");
         var result = await contract.ERC20.Claim("1");
-        //HP Added here
+
+        // Get the Player script component attached to the Player GameObject
+        Player playerScript = player.GetComponent<Player>();
+        // Check if the Player script is found
+        if (playerScript != null)
+        {
+            // Change the value of Pistol_bullet to 20
+            playerScript.Uzi_bullet = 20;
+            Debug.Log("Pistol_bullet value changed to 20");
+        }
+        else
+        {
+            Debug.LogError("Player script not found on the Player GameObject");
+        }
+
         Debug.Log("Token claimed");
         playButton.interactable = true;
         shopButton.interactable = true;
@@ -221,5 +304,30 @@ public class BlockchainManager : MonoBehaviour
         shotgunBtn.interactable = true;
         uziBtn.interactable = true;
         claimStatusText.text = "Uzi Equipped!";
+        //+20
+    }
+
+    public async void RevivePlayer() {
+        reviveButtonText.text = "Reviving!";
+        reviveButton.interactable = false;
+        rePlayButton.interactable = false;
+        var contract = ThirdwebManager.Instance.SDK.GetContract("0x421D1Da942e804b1C1aaDF2e5304343bD7554C0F");
+        var result = await contract.ERC20.Claim("1");
+
+        Canvas_Manger canvasManagerScript = canvasManager.GetComponent<Canvas_Manger>();
+        if (canvasManagerScript != null)
+        {
+            canvasManagerScript.Revive();
+            Debug.Log("Revive");
+        }
+        else
+        {
+            Debug.LogError("Revive failed");
+        }
+
+        Debug.Log("Token claimed");
+        reviveButton.interactable = true;
+        rePlayButton.interactable = true;
+        reviveButtonText.text = "Revive!";
     }
 }

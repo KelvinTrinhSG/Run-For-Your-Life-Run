@@ -10,13 +10,13 @@ public class Player : MonoBehaviour
     [HideInInspector] public float TranX;    
     [HideInInspector] public bool Had_Wepens;    
     [HideInInspector] public bool It_Heart;   
-    [HideInInspector] public int Pistol_bullet;
+    public int Pistol_bullet;
     [HideInInspector] public int Pistol_bullet_Max;
-    [HideInInspector] public int Uzi_bullet;
+    public int Uzi_bullet;
     [HideInInspector] public int Uzi_bullet_Max;
-    [HideInInspector] public int Shotgun_bullet;
+    public int Shotgun_bullet;
     [HideInInspector] public int Shotgun_bullet_Max;
-    [HideInInspector] public int Machinegun_bullet;
+    public int Machinegun_bullet;
     [HideInInspector] public int Machinegun_Max;
     [HideInInspector] public int Gun_Counter;
 

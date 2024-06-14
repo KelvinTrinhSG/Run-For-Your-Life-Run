@@ -124,21 +124,9 @@ public class Canvas_Manger : MonoBehaviour
         Game_Manger.GetComponent<Game_Manger>().Player_Speed = 8;
         //GameObject.FindObjectOfType<AdmobAdss>().LoadAd(); 
     }
-    public async void Revive ()
+    public void Revive ()
     {
-        // GameObject.FindObjectOfType<AdmobAdss>().ShowRewardedAd();
-        try
-        {
-            Debug.Log("Minting ERC20");
-            Contract contract = ThirdwebManager.Instance.SDK.GetContract(DROP_ERC20_CONTRACT);
-            var results = await contract.ERC20.Claim("1");
-            Debug.Log("ERC20 minted");
-            Resume ();
-        }
-        catch (System.Exception)
-        {
-            Debug.Log("Error minting ERC20");
-        }
+        Resume();
     }
     public void Resume ()
     {
