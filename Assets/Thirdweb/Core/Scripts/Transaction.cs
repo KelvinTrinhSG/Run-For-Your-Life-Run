@@ -443,7 +443,8 @@ namespace Thirdweb
             }
             else
             {
-                var supports1559 = Utils.Supports1559(_sdk.Session.ChainId.ToString());
+                var force1559 = Input.Type != null && Input.Type.HexValue == new HexBigInteger((int)TransactionType.EIP1559).HexValue;
+                var supports1559 = force1559 || (Input.Type == null && Utils.Supports1559(_sdk.Session.ChainId.ToString()));
                 if (supports1559)
                 {
                     if (Input.GasPrice == null)

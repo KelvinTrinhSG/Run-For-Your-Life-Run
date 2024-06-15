@@ -8,8 +8,8 @@ public class Game_Manger : MonoBehaviour
     [HideInInspector]public int Max_Hart;
     //[HideInInspector] public int harts;
     public int harts;
-    [HideInInspector] public int Dead_Zombie;
-    [HideInInspector] public string Distens;
+    public int Dead_Zombie;
+    public string Distens;
     public float _player_Speed;
     [HideInInspector] public bool Stop_Meters;
 

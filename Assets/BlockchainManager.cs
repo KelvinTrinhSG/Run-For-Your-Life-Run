@@ -4,6 +4,7 @@ using UnityEngine;
 using Thirdweb;
 using TMPro;
 using UnityEngine.UI;
+using System.Threading.Tasks;
 
 public class BlockchainManager : MonoBehaviour
 {
@@ -12,7 +13,7 @@ public class BlockchainManager : MonoBehaviour
     public GameObject tokenGatePanel;
     public GameObject mainMenuPanel;
     public GameObject shopPanel;
-    
+
     public Button loginButton;
     public Button tokenGateBtn;
     public Text tokenGateBtnText;
@@ -37,6 +38,13 @@ public class BlockchainManager : MonoBehaviour
     public Button reviveButton;
     public Text reviveButtonText;
     public Button rePlayButton;
+    public Button claimTokenButton;
+    public Text claimTokenButtonText;
+    public Button rankingButton;
+    public Text rankingButtonText;
+    public Text tokenBalanceText;
+    public Text rankText;
+    public Text deadZombie;
 
 
     private void Start()
@@ -45,6 +53,26 @@ public class BlockchainManager : MonoBehaviour
         mainMenuPanel.SetActive(false);
         shopPanel.SetActive(false);
         loginButton.gameObject.SetActive(true);
+    }
+
+    private void Update()
+    {
+        Game_Manger gameManagerScript = gameManager.GetComponent<Game_Manger>();
+        if (gameManagerScript != null)
+        {
+            deadZombie.text = gameManagerScript.Dead_Zombie.ToString();
+        }
+        else
+        {
+            Debug.LogError("deadZombie error");
+        }
+    }
+
+    public async void GetTokenBalance()
+    {
+        var contract = ThirdwebManager.Instance.SDK.GetContract("0x25667D0b5a8Bc42C79748058736F5D0eF705018E");
+        var balance = await contract.ERC20.BalanceOf(Address);
+        tokenBalanceText.text = "Token owned: " + balance.displayValue;
     }
 
     public async void Login()
@@ -60,9 +88,21 @@ public class BlockchainManager : MonoBehaviour
         uziBtn.gameObject.SetActive(true);
         uziBtn.interactable = true;
 
+        rankingButtonText.text = "Ranking Zombie Killing";
+        reviveButtonText.text = "Revive";
+        claimTokenButtonText.text = "Token";
+        reviveButton.interactable = true;
+        rePlayButton.interactable = true;
+        claimTokenButton.interactable = true;
+        rankingButton.interactable = false;
+        reviveButton.gameObject.SetActive(true);
+        rePlayButton.gameObject.SetActive(true);
+        claimTokenButton.gameObject.SetActive(true);
+        rankingButton.gameObject.SetActive(false);
+
         Address = await ThirdwebManager.Instance.SDK.Wallet.GetAddress();
         Debug.Log(Address);
-        Contract contract = ThirdwebManager.Instance.SDK.GetContract("0xF36a094783F77C18094a828a03F943fE28Ef574C");
+        Contract contract = ThirdwebManager.Instance.SDK.GetContract("0xC7D48242DA46B64872CD3F94Ced9663086Ff7424");
         List<NFT> nftList = await contract.ERC721.GetOwned(Address);
         if (nftList.Count == 0)
         {
@@ -72,9 +112,11 @@ public class BlockchainManager : MonoBehaviour
         }
         else
         {
-            mainMenuPanel.SetActive(true) ;
+            mainMenuPanel.SetActive(true);
             playButton.gameObject.SetActive(true);
             shopButton.gameObject.SetActive(true);
+            GetTokenBalance();
+            GetRank();
         }
     }
 
@@ -82,10 +124,13 @@ public class BlockchainManager : MonoBehaviour
     {
         tokenGateBtnText.text = "Claiming...";
         tokenGateBtn.interactable = false;
-        var contract = ThirdwebManager.Instance.SDK.GetContract("0xF36a094783F77C18094a828a03F943fE28Ef574C");
+        var contract = ThirdwebManager.Instance.SDK.GetContract("0xC7D48242DA46B64872CD3F94Ced9663086Ff7424");
         var result = await contract.ERC721.ClaimTo(Address, 1);
         tokenGateBtnText.text = "Claimed NFT Pass!";
         tokenGatePanel.SetActive(false);
+        mainMenuPanel.SetActive(true);
+        playButton.gameObject.SetActive(true);
+        shopButton.gameObject.SetActive(true);
     }
 
     public void TogglePanelVisibility()
@@ -96,7 +141,7 @@ public class BlockchainManager : MonoBehaviour
         // Set the panel active or inactive based on the new state
         shopPanel.SetActive(isPanelVisible);
     }
-       
+
     private bool hpBtnOriginalState;
     private bool pistolBtnOriginalState;
     private bool machinegunBtnOriginalState;
@@ -114,7 +159,7 @@ public class BlockchainManager : MonoBehaviour
         uziBtn.interactable = false;
         playButton.interactable = false;
         shopButton.interactable = false;
-        var contract = ThirdwebManager.Instance.SDK.GetContract("0x421D1Da942e804b1C1aaDF2e5304343bD7554C0F");
+        var contract = ThirdwebManager.Instance.SDK.GetContract("0x7685817E7D46AD0AdFba0b4f83fedd48c23f2cA4");
         var result = await contract.ERC20.Claim("1");
         //HP Added here
         // Get the Player script component attached to the Player GameObject
@@ -155,7 +200,7 @@ public class BlockchainManager : MonoBehaviour
         uziBtn.interactable = false;
         playButton.interactable = false;
         shopButton.interactable = false;
-        var contract = ThirdwebManager.Instance.SDK.GetContract("0x421D1Da942e804b1C1aaDF2e5304343bD7554C0F");
+        var contract = ThirdwebManager.Instance.SDK.GetContract("0x7685817E7D46AD0AdFba0b4f83fedd48c23f2cA4");
         var result = await contract.ERC20.Claim("1");
 
         // Get the Player script component attached to the Player GameObject
@@ -196,7 +241,7 @@ public class BlockchainManager : MonoBehaviour
         uziBtn.interactable = false;
         playButton.interactable = false;
         shopButton.interactable = false;
-        var contract = ThirdwebManager.Instance.SDK.GetContract("0x421D1Da942e804b1C1aaDF2e5304343bD7554C0F");
+        var contract = ThirdwebManager.Instance.SDK.GetContract("0x7685817E7D46AD0AdFba0b4f83fedd48c23f2cA4");
         var result = await contract.ERC20.Claim("1");
 
         // Get the Player script component attached to the Player GameObject
@@ -237,7 +282,7 @@ public class BlockchainManager : MonoBehaviour
         uziBtn.interactable = false;
         playButton.interactable = false;
         shopButton.interactable = false;
-        var contract = ThirdwebManager.Instance.SDK.GetContract("0x421D1Da942e804b1C1aaDF2e5304343bD7554C0F");
+        var contract = ThirdwebManager.Instance.SDK.GetContract("0x7685817E7D46AD0AdFba0b4f83fedd48c23f2cA4");
         var result = await contract.ERC20.Claim("1");
 
         // Get the Player script component attached to the Player GameObject
@@ -278,7 +323,7 @@ public class BlockchainManager : MonoBehaviour
         uziBtn.interactable = false;
         playButton.interactable = false;
         shopButton.interactable = false;
-        var contract = ThirdwebManager.Instance.SDK.GetContract("0x421D1Da942e804b1C1aaDF2e5304343bD7554C0F");
+        var contract = ThirdwebManager.Instance.SDK.GetContract("0x7685817E7D46AD0AdFba0b4f83fedd48c23f2cA4");
         var result = await contract.ERC20.Claim("1");
 
         // Get the Player script component attached to the Player GameObject
@@ -307,16 +352,28 @@ public class BlockchainManager : MonoBehaviour
         //+20
     }
 
-    public async void RevivePlayer() {
+    public async void RevivePlayer()
+    {
         reviveButtonText.text = "Reviving!";
         reviveButton.interactable = false;
         rePlayButton.interactable = false;
-        var contract = ThirdwebManager.Instance.SDK.GetContract("0x421D1Da942e804b1C1aaDF2e5304343bD7554C0F");
+        claimTokenButton.interactable = false;
+        rankingButton.interactable = false;
+        var contract = ThirdwebManager.Instance.SDK.GetContract("0x7685817E7D46AD0AdFba0b4f83fedd48c23f2cA4");
         var result = await contract.ERC20.Claim("1");
 
         Canvas_Manger canvasManagerScript = canvasManager.GetComponent<Canvas_Manger>();
         if (canvasManagerScript != null)
         {
+            Game_Manger gameManagerScript = gameManager.GetComponent<Game_Manger>();
+            if (gameManagerScript != null)
+            {
+                gameManagerScript.Dead_Zombie = 0;
+            }
+            else
+            {
+                Debug.LogError("Token error");
+            }
             canvasManagerScript.Revive();
             Debug.Log("Revive");
         }
@@ -326,8 +383,114 @@ public class BlockchainManager : MonoBehaviour
         }
 
         Debug.Log("Token claimed");
+        rankingButtonText.text = "Ranking Zombie Killing";
+        reviveButtonText.text = "Revive";
+        claimTokenButtonText.text = "Token";
         reviveButton.interactable = true;
         rePlayButton.interactable = true;
-        reviveButtonText.text = "Revive!";
+        claimTokenButton.interactable = true;
+        rankingButton.interactable = false;
+        reviveButton.gameObject.SetActive(true);
+        rePlayButton.gameObject.SetActive(true);
+        claimTokenButton.gameObject.SetActive(true);
+        rankingButton.gameObject.SetActive(false);
+    }
+
+    public async void ClaimingToken()
+    {
+        Game_Manger gameManagerScript = gameManager.GetComponent<Game_Manger>();
+        if (gameManagerScript.Dead_Zombie == 0) {
+            claimTokenButton.interactable = false;
+            rankingButton.interactable = false;
+            return;
+        }
+        claimTokenButtonText.text = "Claiming!";
+        reviveButton.interactable = false;
+        rePlayButton.interactable = false;
+        claimTokenButton.interactable = false;
+        rankingButton.interactable = false;
+        var contract = ThirdwebManager.Instance.SDK.GetContract("0x25667D0b5a8Bc42C79748058736F5D0eF705018E");
+
+        if (gameManagerScript != null)
+        {
+            var result = await contract.ERC20.Claim(gameManagerScript.Dead_Zombie.ToString());
+            Debug.Log("Token Claimed");
+            claimTokenButton.gameObject.SetActive(false);
+            reviveButton.interactable = true;
+            rePlayButton.interactable = true;
+            rankingButton.interactable = true;
+            rankingButton.gameObject.SetActive(true);
+            claimTokenButtonText.text = "Token";
+            GetTokenBalance();
+        }
+        else
+        {
+            Debug.LogError("Token error");
+        }
+    }
+
+    public async void SubmitScore()
+    {
+        rankingButtonText.text = "Ranking!";
+        reviveButton.interactable = false;
+        rePlayButton.interactable = false;
+        claimTokenButton.interactable = false;
+        rankingButton.interactable = false;
+
+        Game_Manger gameManagerScript = gameManager.GetComponent<Game_Manger>();
+        if (gameManagerScript != null)
+        {
+            var contract = ThirdwebManager.Instance.SDK.GetContract(
+                "0x9019e4a6eABc4B2a6919d09c7A74A1ee02560671",
+                "[{\"type\":\"event\",\"name\":\"ScoreAddedd\",\"inputs\":[{\"type\":\"address\",\"name\":\"player\",\"indexed\":true,\"internalType\":\"address\"},{\"type\":\"uint256\",\"name\":\"score\",\"indexed\":false,\"internalType\":\"uint256\"}],\"outputs\":[],\"anonymous\":false},{\"type\":\"function\",\"name\":\"_scores\",\"inputs\":[{\"type\":\"address\",\"name\":\"\",\"internalType\":\"address\"}],\"outputs\":[{\"type\":\"uint256\",\"name\":\"\",\"internalType\":\"uint256\"}],\"stateMutability\":\"view\"},{\"type\":\"function\",\"name\":\"getRank\",\"inputs\":[{\"type\":\"address\",\"name\":\"player\",\"internalType\":\"address\"}],\"outputs\":[{\"type\":\"uint256\",\"name\":\"rank\",\"internalType\":\"uint256\"}],\"stateMutability\":\"view\"},{\"type\":\"function\",\"name\":\"submitScore\",\"inputs\":[{\"type\":\"uint256\",\"name\":\"score\",\"internalType\":\"uint256\"}],\"outputs\":[],\"stateMutability\":\"nonpayable\"}]"
+            );
+            await contract.Write("submitScore", (int)gameManagerScript.Dead_Zombie);
+            reviveButton.interactable = true;
+            rePlayButton.interactable = true;
+            GetRank();
+        }
+        else
+        {
+            Debug.LogError("Token error");
+        }
+    }
+
+    internal async void GetRank()
+    {
+        var contract = ThirdwebManager.Instance.SDK.GetContract(
+            "0x9019e4a6eABc4B2a6919d09c7A74A1ee02560671",
+            "[{\"type\":\"event\",\"name\":\"ScoreAddedd\",\"inputs\":[{\"type\":\"address\",\"name\":\"player\",\"indexed\":true,\"internalType\":\"address\"},{\"type\":\"uint256\",\"name\":\"score\",\"indexed\":false,\"internalType\":\"uint256\"}],\"outputs\":[],\"anonymous\":false},{\"type\":\"function\",\"name\":\"_scores\",\"inputs\":[{\"type\":\"address\",\"name\":\"\",\"internalType\":\"address\"}],\"outputs\":[{\"type\":\"uint256\",\"name\":\"\",\"internalType\":\"uint256\"}],\"stateMutability\":\"view\"},{\"type\":\"function\",\"name\":\"getRank\",\"inputs\":[{\"type\":\"address\",\"name\":\"player\",\"internalType\":\"address\"}],\"outputs\":[{\"type\":\"uint256\",\"name\":\"rank\",\"internalType\":\"uint256\"}],\"stateMutability\":\"view\"},{\"type\":\"function\",\"name\":\"submitScore\",\"inputs\":[{\"type\":\"uint256\",\"name\":\"score\",\"internalType\":\"uint256\"}],\"outputs\":[],\"stateMutability\":\"nonpayable\"}]"
+            );
+        var rank = await contract.Read<int>("getRank", Address);
+        Debug.Log($"Rank for address {Address} is {rank}");
+        rankText.text = rank.ToString();
+    }
+
+    public void ReplayGame() {
+        reviveButton.interactable = false;
+        claimTokenButton.interactable = false;
+        rankingButton.interactable = false;
+        Canvas_Manger canvasManagerScript = canvasManager.GetComponent<Canvas_Manger>();
+        if (canvasManagerScript != null)
+        {
+            canvasManagerScript.REviv_Replay();
+
+            rankingButtonText.text = "Ranking Zombie Killing";
+            reviveButtonText.text = "Revive";
+            claimTokenButtonText.text = "Token";
+            reviveButton.interactable = true;
+            rePlayButton.interactable = true;
+            claimTokenButton.interactable = true;
+            rankingButton.interactable = false;
+            reviveButton.gameObject.SetActive(true);
+            rePlayButton.gameObject.SetActive(true);
+            claimTokenButton.gameObject.SetActive(true);
+            rankingButton.gameObject.SetActive(false);
+
+        }
+        else
+        {
+            Debug.LogError("Replay failed");
+        }
     }
 }
