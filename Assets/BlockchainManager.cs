@@ -70,7 +70,7 @@ public class BlockchainManager : MonoBehaviour
 
     public async void GetTokenBalance()
     {
-        var contract = ThirdwebManager.Instance.SDK.GetContract("0x25667D0b5a8Bc42C79748058736F5D0eF705018E");
+        var contract = ThirdwebManager.Instance.SDK.GetContract("0xF1cec9786E0F10793e58bF7673614d050cEb366c");
         var balance = await contract.ERC20.BalanceOf(Address);
         tokenBalanceText.text = "Token owned: " + balance.displayValue;
     }
@@ -102,7 +102,7 @@ public class BlockchainManager : MonoBehaviour
 
         Address = await ThirdwebManager.Instance.SDK.Wallet.GetAddress();
         Debug.Log(Address);
-        Contract contract = ThirdwebManager.Instance.SDK.GetContract("0xC7D48242DA46B64872CD3F94Ced9663086Ff7424");
+        Contract contract = ThirdwebManager.Instance.SDK.GetContract("0x849F9cC4F10218EDc761C4Bb6De767cCcf91F05d");
         List<NFT> nftList = await contract.ERC721.GetOwned(Address);
         if (nftList.Count == 0)
         {
@@ -124,7 +124,7 @@ public class BlockchainManager : MonoBehaviour
     {
         tokenGateBtnText.text = "Claiming...";
         tokenGateBtn.interactable = false;
-        var contract = ThirdwebManager.Instance.SDK.GetContract("0xC7D48242DA46B64872CD3F94Ced9663086Ff7424");
+        var contract = ThirdwebManager.Instance.SDK.GetContract("0x849F9cC4F10218EDc761C4Bb6De767cCcf91F05d");
         var result = await contract.ERC721.ClaimTo(Address, 1);
         tokenGateBtnText.text = "Claimed NFT Pass!";
         tokenGatePanel.SetActive(false);
@@ -159,7 +159,7 @@ public class BlockchainManager : MonoBehaviour
         uziBtn.interactable = false;
         playButton.interactable = false;
         shopButton.interactable = false;
-        var contract = ThirdwebManager.Instance.SDK.GetContract("0x7685817E7D46AD0AdFba0b4f83fedd48c23f2cA4");
+        var contract = ThirdwebManager.Instance.SDK.GetContract("0x338687229d334CF888C9F0a1C419c6C842dE70D1");
         var result = await contract.ERC20.Claim("1");
         //HP Added here
         // Get the Player script component attached to the Player GameObject
@@ -200,7 +200,7 @@ public class BlockchainManager : MonoBehaviour
         uziBtn.interactable = false;
         playButton.interactable = false;
         shopButton.interactable = false;
-        var contract = ThirdwebManager.Instance.SDK.GetContract("0x7685817E7D46AD0AdFba0b4f83fedd48c23f2cA4");
+        var contract = ThirdwebManager.Instance.SDK.GetContract("0x338687229d334CF888C9F0a1C419c6C842dE70D1");
         var result = await contract.ERC20.Claim("1");
 
         // Get the Player script component attached to the Player GameObject
@@ -241,7 +241,7 @@ public class BlockchainManager : MonoBehaviour
         uziBtn.interactable = false;
         playButton.interactable = false;
         shopButton.interactable = false;
-        var contract = ThirdwebManager.Instance.SDK.GetContract("0x7685817E7D46AD0AdFba0b4f83fedd48c23f2cA4");
+        var contract = ThirdwebManager.Instance.SDK.GetContract("0x338687229d334CF888C9F0a1C419c6C842dE70D1");
         var result = await contract.ERC20.Claim("1");
 
         // Get the Player script component attached to the Player GameObject
@@ -282,7 +282,7 @@ public class BlockchainManager : MonoBehaviour
         uziBtn.interactable = false;
         playButton.interactable = false;
         shopButton.interactable = false;
-        var contract = ThirdwebManager.Instance.SDK.GetContract("0x7685817E7D46AD0AdFba0b4f83fedd48c23f2cA4");
+        var contract = ThirdwebManager.Instance.SDK.GetContract("0x338687229d334CF888C9F0a1C419c6C842dE70D1");
         var result = await contract.ERC20.Claim("1");
 
         // Get the Player script component attached to the Player GameObject
@@ -323,7 +323,7 @@ public class BlockchainManager : MonoBehaviour
         uziBtn.interactable = false;
         playButton.interactable = false;
         shopButton.interactable = false;
-        var contract = ThirdwebManager.Instance.SDK.GetContract("0x7685817E7D46AD0AdFba0b4f83fedd48c23f2cA4");
+        var contract = ThirdwebManager.Instance.SDK.GetContract("0x338687229d334CF888C9F0a1C419c6C842dE70D1");
         var result = await contract.ERC20.Claim("1");
 
         // Get the Player script component attached to the Player GameObject
@@ -359,7 +359,7 @@ public class BlockchainManager : MonoBehaviour
         rePlayButton.interactable = false;
         claimTokenButton.interactable = false;
         rankingButton.interactable = false;
-        var contract = ThirdwebManager.Instance.SDK.GetContract("0x7685817E7D46AD0AdFba0b4f83fedd48c23f2cA4");
+        var contract = ThirdwebManager.Instance.SDK.GetContract("0x338687229d334CF888C9F0a1C419c6C842dE70D1");
         var result = await contract.ERC20.Claim("1");
 
         Canvas_Manger canvasManagerScript = canvasManager.GetComponent<Canvas_Manger>();
@@ -409,7 +409,7 @@ public class BlockchainManager : MonoBehaviour
         rePlayButton.interactable = false;
         claimTokenButton.interactable = false;
         rankingButton.interactable = false;
-        var contract = ThirdwebManager.Instance.SDK.GetContract("0x25667D0b5a8Bc42C79748058736F5D0eF705018E");
+        var contract = ThirdwebManager.Instance.SDK.GetContract("0xF1cec9786E0F10793e58bF7673614d050cEb366c");
 
         if (gameManagerScript != null)
         {
@@ -441,7 +441,7 @@ public class BlockchainManager : MonoBehaviour
         if (gameManagerScript != null)
         {
             var contract = ThirdwebManager.Instance.SDK.GetContract(
-                "0x9019e4a6eABc4B2a6919d09c7A74A1ee02560671",
+                "0x88A6e16d4058c114eDFdb3593Bfc34C844463Db8",
                 "[{\"type\":\"event\",\"name\":\"ScoreAddedd\",\"inputs\":[{\"type\":\"address\",\"name\":\"player\",\"indexed\":true,\"internalType\":\"address\"},{\"type\":\"uint256\",\"name\":\"score\",\"indexed\":false,\"internalType\":\"uint256\"}],\"outputs\":[],\"anonymous\":false},{\"type\":\"function\",\"name\":\"_scores\",\"inputs\":[{\"type\":\"address\",\"name\":\"\",\"internalType\":\"address\"}],\"outputs\":[{\"type\":\"uint256\",\"name\":\"\",\"internalType\":\"uint256\"}],\"stateMutability\":\"view\"},{\"type\":\"function\",\"name\":\"getRank\",\"inputs\":[{\"type\":\"address\",\"name\":\"player\",\"internalType\":\"address\"}],\"outputs\":[{\"type\":\"uint256\",\"name\":\"rank\",\"internalType\":\"uint256\"}],\"stateMutability\":\"view\"},{\"type\":\"function\",\"name\":\"submitScore\",\"inputs\":[{\"type\":\"uint256\",\"name\":\"score\",\"internalType\":\"uint256\"}],\"outputs\":[],\"stateMutability\":\"nonpayable\"}]"
             );
             await contract.Write("submitScore", (int)gameManagerScript.Dead_Zombie);
@@ -458,7 +458,7 @@ public class BlockchainManager : MonoBehaviour
     internal async void GetRank()
     {
         var contract = ThirdwebManager.Instance.SDK.GetContract(
-            "0x9019e4a6eABc4B2a6919d09c7A74A1ee02560671",
+            "0x88A6e16d4058c114eDFdb3593Bfc34C844463Db8",
             "[{\"type\":\"event\",\"name\":\"ScoreAddedd\",\"inputs\":[{\"type\":\"address\",\"name\":\"player\",\"indexed\":true,\"internalType\":\"address\"},{\"type\":\"uint256\",\"name\":\"score\",\"indexed\":false,\"internalType\":\"uint256\"}],\"outputs\":[],\"anonymous\":false},{\"type\":\"function\",\"name\":\"_scores\",\"inputs\":[{\"type\":\"address\",\"name\":\"\",\"internalType\":\"address\"}],\"outputs\":[{\"type\":\"uint256\",\"name\":\"\",\"internalType\":\"uint256\"}],\"stateMutability\":\"view\"},{\"type\":\"function\",\"name\":\"getRank\",\"inputs\":[{\"type\":\"address\",\"name\":\"player\",\"internalType\":\"address\"}],\"outputs\":[{\"type\":\"uint256\",\"name\":\"rank\",\"internalType\":\"uint256\"}],\"stateMutability\":\"view\"},{\"type\":\"function\",\"name\":\"submitScore\",\"inputs\":[{\"type\":\"uint256\",\"name\":\"score\",\"internalType\":\"uint256\"}],\"outputs\":[],\"stateMutability\":\"nonpayable\"}]"
             );
         var rank = await contract.Read<int>("getRank", Address);
