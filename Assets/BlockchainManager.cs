@@ -46,6 +46,10 @@ public class BlockchainManager : MonoBehaviour
     public Text rankText;
     public Text deadZombie;
 
+    private string nftContractAddress = "0x952eAaaC21b159921C64Ab89F676132830C842E2";
+    private string gemContractAddress = "0xfd3373638589eA945fB234e0CE3Db5A7f09691e0";
+    private string tokenContractAddress = "0x93066eeEC56718A942e321C3bd9E3DCA7a001607";
+    private string leaderboardContractAddress = "0xd94Ceeaf7dD4B14c3CB71872016bBd3093B912c3";
 
     private void Start()
     {
@@ -70,7 +74,7 @@ public class BlockchainManager : MonoBehaviour
 
     public async void GetTokenBalance()
     {
-        var contract = ThirdwebManager.Instance.SDK.GetContract("0xF1cec9786E0F10793e58bF7673614d050cEb366c");
+        var contract = ThirdwebManager.Instance.SDK.GetContract(tokenContractAddress);
         var balance = await contract.ERC20.BalanceOf(Address);
         tokenBalanceText.text = "Token owned: " + balance.displayValue;
     }
@@ -102,7 +106,7 @@ public class BlockchainManager : MonoBehaviour
 
         Address = await ThirdwebManager.Instance.SDK.Wallet.GetAddress();
         Debug.Log(Address);
-        Contract contract = ThirdwebManager.Instance.SDK.GetContract("0x849F9cC4F10218EDc761C4Bb6De767cCcf91F05d");
+        Contract contract = ThirdwebManager.Instance.SDK.GetContract(nftContractAddress);
         List<NFT> nftList = await contract.ERC721.GetOwned(Address);
         if (nftList.Count == 0)
         {
@@ -124,7 +128,7 @@ public class BlockchainManager : MonoBehaviour
     {
         tokenGateBtnText.text = "Claiming...";
         tokenGateBtn.interactable = false;
-        var contract = ThirdwebManager.Instance.SDK.GetContract("0x849F9cC4F10218EDc761C4Bb6De767cCcf91F05d");
+        var contract = ThirdwebManager.Instance.SDK.GetContract(nftContractAddress);
         var result = await contract.ERC721.ClaimTo(Address, 1);
         tokenGateBtnText.text = "Claimed NFT Pass!";
         tokenGatePanel.SetActive(false);
@@ -159,7 +163,7 @@ public class BlockchainManager : MonoBehaviour
         uziBtn.interactable = false;
         playButton.interactable = false;
         shopButton.interactable = false;
-        var contract = ThirdwebManager.Instance.SDK.GetContract("0x338687229d334CF888C9F0a1C419c6C842dE70D1");
+        var contract = ThirdwebManager.Instance.SDK.GetContract(gemContractAddress);
         var result = await contract.ERC20.Claim("1");
         //HP Added here
         // Get the Player script component attached to the Player GameObject
@@ -200,7 +204,7 @@ public class BlockchainManager : MonoBehaviour
         uziBtn.interactable = false;
         playButton.interactable = false;
         shopButton.interactable = false;
-        var contract = ThirdwebManager.Instance.SDK.GetContract("0x338687229d334CF888C9F0a1C419c6C842dE70D1");
+        var contract = ThirdwebManager.Instance.SDK.GetContract(gemContractAddress);
         var result = await contract.ERC20.Claim("1");
 
         // Get the Player script component attached to the Player GameObject
@@ -241,7 +245,7 @@ public class BlockchainManager : MonoBehaviour
         uziBtn.interactable = false;
         playButton.interactable = false;
         shopButton.interactable = false;
-        var contract = ThirdwebManager.Instance.SDK.GetContract("0x338687229d334CF888C9F0a1C419c6C842dE70D1");
+        var contract = ThirdwebManager.Instance.SDK.GetContract(gemContractAddress);
         var result = await contract.ERC20.Claim("1");
 
         // Get the Player script component attached to the Player GameObject
@@ -282,7 +286,7 @@ public class BlockchainManager : MonoBehaviour
         uziBtn.interactable = false;
         playButton.interactable = false;
         shopButton.interactable = false;
-        var contract = ThirdwebManager.Instance.SDK.GetContract("0x338687229d334CF888C9F0a1C419c6C842dE70D1");
+        var contract = ThirdwebManager.Instance.SDK.GetContract(gemContractAddress);
         var result = await contract.ERC20.Claim("1");
 
         // Get the Player script component attached to the Player GameObject
@@ -323,7 +327,7 @@ public class BlockchainManager : MonoBehaviour
         uziBtn.interactable = false;
         playButton.interactable = false;
         shopButton.interactable = false;
-        var contract = ThirdwebManager.Instance.SDK.GetContract("0x338687229d334CF888C9F0a1C419c6C842dE70D1");
+        var contract = ThirdwebManager.Instance.SDK.GetContract(gemContractAddress);
         var result = await contract.ERC20.Claim("1");
 
         // Get the Player script component attached to the Player GameObject
@@ -359,7 +363,7 @@ public class BlockchainManager : MonoBehaviour
         rePlayButton.interactable = false;
         claimTokenButton.interactable = false;
         rankingButton.interactable = false;
-        var contract = ThirdwebManager.Instance.SDK.GetContract("0x338687229d334CF888C9F0a1C419c6C842dE70D1");
+        var contract = ThirdwebManager.Instance.SDK.GetContract(gemContractAddress);
         var result = await contract.ERC20.Claim("1");
 
         Canvas_Manger canvasManagerScript = canvasManager.GetComponent<Canvas_Manger>();
@@ -409,7 +413,7 @@ public class BlockchainManager : MonoBehaviour
         rePlayButton.interactable = false;
         claimTokenButton.interactable = false;
         rankingButton.interactable = false;
-        var contract = ThirdwebManager.Instance.SDK.GetContract("0xF1cec9786E0F10793e58bF7673614d050cEb366c");
+        var contract = ThirdwebManager.Instance.SDK.GetContract(tokenContractAddress);
 
         if (gameManagerScript != null)
         {
@@ -441,7 +445,7 @@ public class BlockchainManager : MonoBehaviour
         if (gameManagerScript != null)
         {
             var contract = ThirdwebManager.Instance.SDK.GetContract(
-                "0x88A6e16d4058c114eDFdb3593Bfc34C844463Db8",
+                leaderboardContractAddress,
                 "[{\"type\":\"event\",\"name\":\"ScoreAddedd\",\"inputs\":[{\"type\":\"address\",\"name\":\"player\",\"indexed\":true,\"internalType\":\"address\"},{\"type\":\"uint256\",\"name\":\"score\",\"indexed\":false,\"internalType\":\"uint256\"}],\"outputs\":[],\"anonymous\":false},{\"type\":\"function\",\"name\":\"_scores\",\"inputs\":[{\"type\":\"address\",\"name\":\"\",\"internalType\":\"address\"}],\"outputs\":[{\"type\":\"uint256\",\"name\":\"\",\"internalType\":\"uint256\"}],\"stateMutability\":\"view\"},{\"type\":\"function\",\"name\":\"getRank\",\"inputs\":[{\"type\":\"address\",\"name\":\"player\",\"internalType\":\"address\"}],\"outputs\":[{\"type\":\"uint256\",\"name\":\"rank\",\"internalType\":\"uint256\"}],\"stateMutability\":\"view\"},{\"type\":\"function\",\"name\":\"submitScore\",\"inputs\":[{\"type\":\"uint256\",\"name\":\"score\",\"internalType\":\"uint256\"}],\"outputs\":[],\"stateMutability\":\"nonpayable\"}]"
             );
             await contract.Write("submitScore", (int)gameManagerScript.Dead_Zombie);
@@ -458,7 +462,7 @@ public class BlockchainManager : MonoBehaviour
     internal async void GetRank()
     {
         var contract = ThirdwebManager.Instance.SDK.GetContract(
-            "0x88A6e16d4058c114eDFdb3593Bfc34C844463Db8",
+            leaderboardContractAddress,
             "[{\"type\":\"event\",\"name\":\"ScoreAddedd\",\"inputs\":[{\"type\":\"address\",\"name\":\"player\",\"indexed\":true,\"internalType\":\"address\"},{\"type\":\"uint256\",\"name\":\"score\",\"indexed\":false,\"internalType\":\"uint256\"}],\"outputs\":[],\"anonymous\":false},{\"type\":\"function\",\"name\":\"_scores\",\"inputs\":[{\"type\":\"address\",\"name\":\"\",\"internalType\":\"address\"}],\"outputs\":[{\"type\":\"uint256\",\"name\":\"\",\"internalType\":\"uint256\"}],\"stateMutability\":\"view\"},{\"type\":\"function\",\"name\":\"getRank\",\"inputs\":[{\"type\":\"address\",\"name\":\"player\",\"internalType\":\"address\"}],\"outputs\":[{\"type\":\"uint256\",\"name\":\"rank\",\"internalType\":\"uint256\"}],\"stateMutability\":\"view\"},{\"type\":\"function\",\"name\":\"submitScore\",\"inputs\":[{\"type\":\"uint256\",\"name\":\"score\",\"internalType\":\"uint256\"}],\"outputs\":[],\"stateMutability\":\"nonpayable\"}]"
             );
         var rank = await contract.Read<int>("getRank", Address);

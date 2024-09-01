@@ -2505,6 +2505,81 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6f5a29535f781d247b80941f43690885, type: 3}
+--- !u!1 &440927676
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 440927677}
+  - component: {fileID: 440927679}
+  - component: {fileID: 440927678}
+  m_Layer: 5
+  m_Name: KakarotLogo
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &440927677
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 440927676}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1.2, y: 1.2, z: 1.2}
+  m_ConstrainProportionsScale: 1
+  m_Children: []
+  m_Father: {fileID: 7848810702899319460}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: -275, y: 366}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &440927678
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 440927676}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 21300000, guid: b52cbc7782cf5084780c02a8d8ee86c3, type: 3}
+  m_Type: 0
+  m_PreserveAspect: 1
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!222 &440927679
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 440927676}
+  m_CullTransparentMesh: 1
 --- !u!4 &454446906 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5827054929291625999, guid: 6f5a29535f781d247b80941f43690885, type: 3}
@@ -2612,7 +2687,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4404896360829706404, guid: 379ed01658d62a14484f953196ff19db, type: 3}
       propertyPath: activeChain
-      value: DCHAIN testnet
+      value: Kakarot Sepolia
       objectReference: {fileID: 0}
     - target: {fileID: 4404896360829706404, guid: 379ed01658d62a14484f953196ff19db, type: 3}
       propertyPath: factoryAddress
@@ -2628,7 +2703,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4404896360829706404, guid: 379ed01658d62a14484f953196ff19db, type: 3}
       propertyPath: supportedChains.Array.data[0].chainId
-      value: 2713017997578000
+      value: 1802203764
       objectReference: {fileID: 0}
     - target: {fileID: 4404896360829706404, guid: 379ed01658d62a14484f953196ff19db, type: 3}
       propertyPath: supportedChains.Array.data[1].chainId
@@ -2672,7 +2747,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4404896360829706404, guid: 379ed01658d62a14484f953196ff19db, type: 3}
       propertyPath: supportedChains.Array.data[0].identifier
-      value: DCHAIN testnet
+      value: Kakarot Sepolia
       objectReference: {fileID: 0}
     - target: {fileID: 4404896360829706404, guid: 379ed01658d62a14484f953196ff19db, type: 3}
       propertyPath: supportedChains.Array.data[1].identifier
@@ -2712,7 +2787,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4404896360829706404, guid: 379ed01658d62a14484f953196ff19db, type: 3}
       propertyPath: supportedChains.Array.data[0].rpcOverride
-      value: https://dchaintestnet-2713017997578000-1.jsonrpc.testnet.sagarpc.io
+      value: https://sepolia-rpc.kakarot.org
       objectReference: {fileID: 0}
     - target: {fileID: 4404896360829706404, guid: 379ed01658d62a14484f953196ff19db, type: 3}
       propertyPath: supportedChains.Array.data[10].identifier
@@ -15715,6 +15790,9 @@ PrefabInstance:
       addedObject: {fileID: 2042108553}
     - targetCorrespondingSourceObject: {fileID: 3552281516529805030, guid: 0fd75e11c284b6c4680e9a7f2c9efc85, type: 3}
       insertIndex: 2
+      addedObject: {fileID: 440927677}
+    - targetCorrespondingSourceObject: {fileID: 3552281516529805030, guid: 0fd75e11c284b6c4680e9a7f2c9efc85, type: 3}
+      insertIndex: 3
       addedObject: {fileID: 1490361487}
     - targetCorrespondingSourceObject: {fileID: 3552281516529805030, guid: 0fd75e11c284b6c4680e9a7f2c9efc85, type: 3}
       insertIndex: -1
